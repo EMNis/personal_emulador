@@ -528,26 +528,6 @@ body {
 .whatsapp-bg { background: #25d366; }
 
 /* ============================================
-   FAB — botón flotante central
-   ============================================ */
-.fab-button {
-  position: absolute;
-  bottom: 68px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(135deg, #1e6fa8, #3a8fb5);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(30,111,168,0.5);
-  cursor: pointer;
-  z-index: 10;
-}
-
-/* ============================================
    NAV BAR — barra de navegación inferior
    ============================================ */
 .nav-bar {

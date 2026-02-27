@@ -1,0 +1,14 @@
+{
+  "name": "personal-app-emulator",
+  "version": "1.0.0",
+  "description": "Emulador de la app de Personal con integración de WhatsApp y Chat",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=8080"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

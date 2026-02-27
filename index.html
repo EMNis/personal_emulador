@@ -8,11 +8,8 @@
 <!-- Tipografía Nunito desde Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Nuestro archivo de estilos (debe estar en la misma carpeta) -->
-<link rel="stylesheet" href="styles.css">
-
-<!-- Script de Tidio Live Chat (carga en segundo plano) -->
-<script src="//code.tidio.co/cdcvpmq1itowmt3wueaoni6hfn67omjl.js" async></script>
+<!-- Nuestro archivo de estilos (ahora en src/css) -->
+<link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
 
@@ -477,8 +474,8 @@
                     </div>
                     <span class="icon-label">Smarthome</span>
                   </div>
-                  <!-- WHATSAPP → abre ManyChat bot -->
-                  <div class="icon-item" onclick="abrirWhatsAppBot()">
+                  <!-- WHATSAPP → abre ventana de confirmación -->
+                  <div class="icon-item" onclick="abrirModalWhatsApp()">
                     <div class="icon-square whatsapp-bg">
                       <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -497,14 +494,6 @@
 
       </div>
       <!-- /scroll-content -->
-
-      <!-- BOTÓN FLOTANTE ($) -->
-      <div class="fab-button">
-        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-          <line x1="12" y1="1" x2="12" y2="23"/>
-          <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-        </svg>
-      </div>
 
       <!-- BARRA DE NAVEGACIÓN INFERIOR -->
       <nav class="nav-bar">
@@ -543,11 +532,64 @@
     <!-- BARRA INFERIOR DEL TELÉFONO -->
     <div class="home-indicator"></div>
 
+    <!-- ========================================
+         MODAL WHATSAPP
+         Ventana de confirmación antes de abrir WA
+         ======================================== -->
+    <div id="whatsapp-modal" style="display:none; position:absolute; inset:0; background:rgba(0,0,0,0.5); z-index:100; align-items:flex-end; border-radius:42px; overflow:hidden;">
+      <div style="background:#fff; width:100%; border-radius:24px 24px 0 0; padding:24px 20px 32px;">
+
+        <!-- Encabezado del modal -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <span style="font-size:16px; font-weight:800; color:#1a1a2e;">Contactar por WhatsApp</span>
+          <div onclick="cerrarModalWhatsApp()" style="cursor:pointer; color:#888; font-size:20px; line-height:1;">✕</div>
+        </div>
+
+        <!-- Ícono grande de WhatsApp -->
+        <div style="text-align:center; margin-bottom:16px;">
+          <div style="width:72px; height:72px; background:#25d366; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.849L.057 23.569a.75.75 0 00.914.914l5.748-1.47A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.524-5.2-1.435l-.371-.222-3.853.984.999-3.77-.242-.389A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Texto informativo -->
+        <p style="text-align:center; font-size:13px; color:#555; margin-bottom:6px; font-weight:600;">
+          Vas a ser redirigido a WhatsApp
+        </p>
+        <p style="text-align:center; font-size:12px; color:#888; margin-bottom:20px;">
+          +54 9 11 3139 2122
+        </p>
+
+        <!-- Botón principal -->
+        <button onclick="abrirWhatsAppBot(); cerrarModalWhatsApp();"
+          style="width:100%; background:#25d366; color:#fff; border:none; border-radius:14px; padding:14px; font-size:15px; font-weight:800; font-family:'Nunito',sans-serif; cursor:pointer; margin-bottom:10px;">
+          Abrir WhatsApp
+        </button>
+
+        <!-- Botón cancelar -->
+        <button onclick="cerrarModalWhatsApp()"
+          style="width:100%; background:#f5f5f5; color:#555; border:none; border-radius:14px; padding:12px; font-size:14px; font-weight:700; font-family:'Nunito',sans-serif; cursor:pointer;">
+          Cancelar
+        </button>
+
+      </div>
+    </div>
+
     </div>
 </div>
 
-<!-- Nuestro archivo JavaScript -->
-<script src="app.js"></script>
+<!-- SCRIPTS — en orden correcto de dependencias -->
+<!-- 1. Primero WhatsApp (define abrirWhatsAppBot) -->
+<script src="src/js/whatsapp.js"></script>
+
+<!-- 2. Tidio chat (define abrirChat) -->
+<script src="src/js/chat.js"></script>
+
+<!-- 3. App principal al final (usa las funciones anteriores) -->
+<script src="src/js/app.js"></script>
 
 </body>
 </html>
